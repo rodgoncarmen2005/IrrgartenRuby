@@ -1,30 +1,15 @@
 #encoding:utf-8
 
-require_relative 'Weapon'
-require_relative 'Shield'
+require_relative 'weapon'
+require_relative 'shield'
+require_relative 'directions'
+require_relative 'orientation'
+require_relative 'game_character'
 
 module Irrgarten
 
 	class Irrgarten
 		
-		module Directions
-			LEFT = :left
-			RIGHT = :right
-			UP = :up
-			DOWN = :down
-		end	
-		
-		module Orientation
-			VERTICAL = :vertical
-			HORIZONTAL = :horizontal
-		end	
-	
-		module GameCharacter
-			PLAYER = :player
-			MONSTER = :monster
-		end
-	
-
 		def self.prueba_weapon
 			
 			w = Weapon.new(2.0, 3)
