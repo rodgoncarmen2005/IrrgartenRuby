@@ -1,7 +1,10 @@
 #encoding:utf-8
 
+<<<<<<< HEAD
 require_relative 'dice'
 
+=======
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 module Irrgarten
 
 	class Weapon
@@ -14,7 +17,11 @@ module Irrgarten
 		end
 		
 		#attack
+<<<<<<< HEAD
 		def attack
+=======
+		def attack ()
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			salida = 0.0
 			if @uses > 0 then
 				@uses -= 1
@@ -24,13 +31,23 @@ module Irrgarten
 		end
 	
 		#discard
+<<<<<<< HEAD
 		def discard
 			Dice.discard_element(@uses)
+=======
+		def discard ()
+			salida = element_discard(@uses);
+			salida
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 		end
 	
 	
 		#toString
+<<<<<<< HEAD
 		def to_s
+=======
+		def to_s ()
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			"W[#{@power},#{@uses}]"	
 		end
 	end

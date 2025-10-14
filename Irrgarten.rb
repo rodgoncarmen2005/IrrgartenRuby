@@ -6,32 +6,53 @@ require_relative 'directions'
 require_relative 'orientation'
 require_relative 'game_character'
 require_relative 'game_state'
+<<<<<<< HEAD
 require_relative 'dice'
+=======
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 
 module Irrgarten
 
 	class Irrgarten
 		
+<<<<<<< HEAD
 		def self.prueba_weapon(power, uses)
 			
 			w = Weapon.new(power, uses)
+=======
+		def self.prueba_weapon
+			
+			w = Weapon.new(2.0, 3)
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			puts w.to_s
 			4.times do
 				puts "Potencia de disparo #{w.attack}" 
 				puts w.to_s
+<<<<<<< HEAD
 				puts "¿Descartamos el arma? #{w.discard}"
+=======
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			end
 	
 		end
 		
+<<<<<<< HEAD
 		def self.prueba_shield(protection, uses)
 			
 			s = Shield.new(protection, uses)
+=======
+		def self.prueba_shield
+			
+			s = Shield.new(2.0, 3)
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			puts s.to_s
 			4.times do
 				puts "Usamos escudo con protección #{s.protect}" 
 				puts s.to_s
+<<<<<<< HEAD
 				puts "¿Descartamos el escudo? #{s.discard}"
+=======
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			end
 	
 		end
@@ -52,6 +73,7 @@ module Irrgarten
 			puts "Winner: #{gs.winner}"
 			puts "Log: #{gs.log}"
 		end
+<<<<<<< HEAD
 		
 		def self.prueba_dice(max, nplayers, competence)
 			puts "Posición aleatoria: #{Dice.random_pos(max)}"
@@ -106,3 +128,15 @@ module Irrgarten
 	
 end
 
+=======
+	end
+	
+	Irrgarten.prueba_weapon
+	Irrgarten.prueba_shield
+	Irrgarten.prueba_game_state
+	
+end
+
+#Irrgarten::Irgarten.prueba_weapon
+#Irrgarten::Irgarten.prueba_shield
+>>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
