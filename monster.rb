@@ -38,15 +38,18 @@ module Irrgarten
       @row = row
       @col = col
     end
+
+        
+    #toString
+    def to_s ()
+      "M[#{@name}, #{@strength}, #{@intelligence}, #{@health}, #{@row}, #{@col}]"
+    end
+
+    private
     #got_wounded
     def got_wounded
       @health -= 1
     end
 
-    
-    #toString
-    def to_s ()
-      "M[#{@name}, #{@strength}, #{@intelligence}, #{@health}, #{@row}, #{@col}]"
-    end
   end
 end
