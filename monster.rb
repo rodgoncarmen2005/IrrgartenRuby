@@ -18,12 +18,13 @@ module Irrgarten
       @col = -1 #int
     end
     
-    #dead?
+
+    #dead --> true si el monstruo está muerto
     def dead
       @health <= 0
     end
 
-    #attack
+    #attack --> intensidad del ataque
     def attack
       Dice.intensity(@strength)
     end
@@ -33,20 +34,21 @@ module Irrgarten
       
     end
 
-    #pos
+    #pos --> establece la posición del monstruo
     def pos (row, col)
       @row = row
       @col = col
     end
 
         
-    #toString
+    #toString muestra los atributos del monstruo
     def to_s ()
       "M[#{@name}, #{@strength}, #{@intelligence}, #{@health}, #{@row}, #{@col}]"
     end
 
     private
-    #got_wounded
+
+    #got_wounded --> reduce la salud del monstruo en 1
     def got_wounded
       @health -= 1
     end
