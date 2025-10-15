@@ -12,7 +12,7 @@ module Irrgarten
 			@uses = uses              # Integer
 		end
 
-		# protect
+		# protect --> determina si quedan usos y devuelve la protección del escudo
 		def protect
 			salida = 0.0
 			if @uses > 0
@@ -22,12 +22,12 @@ module Irrgarten
 			salida
 		end
 
-		# discard
+		# discard --> devuelve si se desecha el escudo apoyandose en Dice.discard_element
 		def discard
 			Dice.discard_element(@uses)
 		end
 
-		# toString
+		# toString --> muestra los atributos del escudo
 		def to_s
 			"S[#{@protection},#{@uses}]"
 		end

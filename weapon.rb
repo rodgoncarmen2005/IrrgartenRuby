@@ -12,7 +12,7 @@ module Irrgarten
 			@uses = uses    # Integer
 		end
 
-		# attack
+		# attack --> determina si quedan usos y devuelve la potencia del arma
 		def attack
 			salida = 0.0
 			if @uses > 0
@@ -22,12 +22,12 @@ module Irrgarten
 			salida
 		end
 
-		# discard
+		# discard --> devuelve si se desecha el arma apoyandose en Dice.dicard_element
 		def discard
 			Dice.discard_element(@uses)
 		end
 
-		# toString
+		# toString --> muestra los atributos del arma
 		def to_s
 			"W[#{@power},#{@uses}]"
 		end
