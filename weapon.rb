@@ -1,54 +1,36 @@
 #encoding:utf-8
 
-<<<<<<< HEAD
 require_relative 'dice'
 
-=======
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 module Irrgarten
 
 	class Weapon
-		
-		
-		#constructor
-		def initialize (power, uses)
-			@power = power #float
-			@uses = uses #int
+
+		# Constructor
+		def initialize(power, uses)
+			@power = power  # Float
+			@uses = uses    # Integer
 		end
-		
-		#attack
-<<<<<<< HEAD
+
+		# attack
 		def attack
-=======
-		def attack ()
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			salida = 0.0
-			if @uses > 0 then
+			if @uses > 0
 				@uses -= 1
 				salida = @power
 			end
-			salida #se puede poner return pero es opcional, automáticamente se devuelve la última línea
+			salida
 		end
-	
-		#discard
-<<<<<<< HEAD
+
+		# discard
 		def discard
 			Dice.discard_element(@uses)
-=======
-		def discard ()
-			salida = element_discard(@uses);
-			salida
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 		end
-	
-	
-		#toString
-<<<<<<< HEAD
+
+		# toString
 		def to_s
-=======
-		def to_s ()
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
-			"W[#{@power},#{@uses}]"	
+			"W[#{@power},#{@uses}]"
 		end
 	end
+
 end

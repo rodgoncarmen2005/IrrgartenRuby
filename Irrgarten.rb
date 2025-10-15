@@ -1,4 +1,4 @@
-#encoding:utf-8
+# encoding:utf-8
 
 require_relative 'weapon'
 require_relative 'shield'
@@ -6,55 +6,31 @@ require_relative 'directions'
 require_relative 'orientation'
 require_relative 'game_character'
 require_relative 'game_state'
-<<<<<<< HEAD
 require_relative 'dice'
-=======
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
+require_relative 'monster'
 
 module Irrgarten
 
 	class Irrgarten
 		
-<<<<<<< HEAD
 		def self.prueba_weapon(power, uses)
-			
 			w = Weapon.new(power, uses)
-=======
-		def self.prueba_weapon
-			
-			w = Weapon.new(2.0, 3)
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			puts w.to_s
 			4.times do
 				puts "Potencia de disparo #{w.attack}" 
 				puts w.to_s
-<<<<<<< HEAD
 				puts "¿Descartamos el arma? #{w.discard}"
-=======
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			end
-	
 		end
 		
-<<<<<<< HEAD
 		def self.prueba_shield(protection, uses)
-			
 			s = Shield.new(protection, uses)
-=======
-		def self.prueba_shield
-			
-			s = Shield.new(2.0, 3)
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			puts s.to_s
 			4.times do
 				puts "Usamos escudo con protección #{s.protect}" 
 				puts s.to_s
-<<<<<<< HEAD
 				puts "¿Descartamos el escudo? #{s.discard}"
-=======
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
 			end
-	
 		end
 		
 		def self.prueba_game_state
@@ -65,7 +41,7 @@ module Irrgarten
 			ganador = false
 			historia = "nada"
 			
-			gs= GameState.new(laberinto, jugadores, monstruos, numjugadores , ganador, historia)
+			gs = GameState.new(laberinto, jugadores, monstruos, numjugadores, ganador, historia)
 			puts "Labyrinth: #{gs.labyrinth}"
 			puts "Players: #{gs.players}"
 			puts "Monsters: #{gs.monsters}"
@@ -73,7 +49,6 @@ module Irrgarten
 			puts "Winner: #{gs.winner}"
 			puts "Log: #{gs.log}"
 		end
-<<<<<<< HEAD
 		
 		def self.prueba_dice(max, nplayers, competence)
 			puts "Posición aleatoria: #{Dice.random_pos(max)}"
@@ -89,8 +64,20 @@ module Irrgarten
 			puts "Usos restantes: #{Dice.uses_left}"
 			puts "Intensidad: #{Dice.intensity(competence)}"
 		end
+
+		def self.prueba_monster(name, strength, intelligence)
+			m = Monster.new(name, strength, intelligence)
+			puts m.to_s
+			puts "Ataque: #{m.attack}"
+			puts "¿Está muerto? #{m.dead}"
+			m.got_wounded
+			puts "Después de ser herido: #{m.to_s}"
+			m.pos(2, 3)
+			puts "Después de cambiar de posición: #{m.to_s}"
+		end
 	end
 	
+	# Inicio de pruebas
 	puts "Comenzando la prueba de la Práctica 1 de PDOO"
 
 	# PRUEBA DE WEAPON
@@ -121,22 +108,15 @@ module Irrgarten
 	# PRUEBA DE DICE
 	puts "Probando el dado..."
 	2.times do |i|
-	  puts "---Prueba Dado #{i}"
-	Irrgarten.prueba_dice(10, 5, 5)
+		puts "---Prueba Dado #{i}---"
+		Irrgarten.prueba_dice(10, 5, 5)
 	end
 	puts "------------"
-	
-end
 
-=======
-	end
-	
-	Irrgarten.prueba_weapon
-	Irrgarten.prueba_shield
-	Irrgarten.prueba_game_state
-	
-end
+	# PRUEBA DE MONSTER
+	puts "Probando la creación de monstruos..."
+	Irrgarten.prueba_monster("Ogro", 7.5, 3.5)
+	Irrgarten.prueba_monster("Araña", 5.0, 8.0)
+	puts "------------"
 
-#Irrgarten::Irgarten.prueba_weapon
-#Irrgarten::Irgarten.prueba_shield
->>>>>>> d2506f0c24381b620d51da345e0b1f0f144087b2
+end
