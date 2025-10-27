@@ -28,7 +28,9 @@ module Irrgarten
 
     #Coloca los jugadores en posiciones aleatorias dentro del tablero
     def spread_players (Array players)
-
+      player.each do |player|
+        pos = self.random_empty_pos #int []
+        self.put_player_2D(-1, -1, pos[ROW], pos[COL], player)
     end
 
     #Devuelve true si hay un ganador (un jugador en la salida)
@@ -57,18 +59,50 @@ module Irrgarten
       end
     end
 
-
+    # Mueve al jugador en la dirección indicada y devuelve el monstruo si lo hay
     def put_player(direction, player)
-    
+      old_row = player.row
+      old_col = player.col
+      new_pos = dir_2_pos(old_row, old_col, direction)
+      monster = put_player_2D(old_row, old_col, new_pos[ROW], new_pos[COL], player)
+      monster
     end
 
-
+    # Añade un muro en la orientación, posición y longitud indicadas
     def add_block(orientation, start_row, start_col, length)
- 
+      inc_col = 0
+      inc_row = 0
+      if orientation == 'VERTICAL'
+        inc_row = 1
+      if orientation == 'HORIZONTAL'
+        inc_col = 1
+      end
+      row = start_row
+      col = start_col
+      while pos_ok(row, col) && empty_pos(row, col) && length > 0
+        @labyrinth[row][col] = @@BLOCK_CHAR
+        row += inc_row
+        col += inc_col
+        length -= 1
+      end
     end
 
+    # Devuelve las direcciones válidas desde la posición indicada
     def valid_moves(row, col)
-    
+      output = Array.new
+      if can_step_on(row+1, col)
+        output.push(Directions::DOWN)
+      end
+      if can_step_on(row-1, col)
+        output.push(Directions::UP)
+      end
+      if can_step_on(row, col+1)
+        output.push(DIRECTIONS::RIGHT)
+      end
+      if can_step_on(row, col-1)
+        output.push(DIRECTIONS::LEFT)
+      end
+      output
     end
 
     private
@@ -149,10 +183,32 @@ module Irrgarten
       [row, col]
     end
 
+    # Mueve al jugador a la posición indicada y devuelve el monstruo si lo hay
     def put_player_2D(old_row, old_col, row, col, player)
+      monster = nil
+      if self.can_step_on(row, col)
+        if self.can_step_on(old_row, old_col)
+          p = @players[old_row][old_col]
+          if p == player
+            self.update_old_pos(old_row, old_col)
+            @players[old_row][old_col] = nil
+          end
+        end
 
-    end
+        monster_pos = self.monster_pos(row, col)
+        if monster_pos
+          @labyrinth[row][col] = @@COMBAT_CHAR
+          monster = @monster[row][col]
+        else
+          number = player.number
+          @labyrinth[row][col] = number.to_s
+        end
+        @players[row][col] = player
+        player.set_pos(row, col)
 
-  end 
+        monster
+
+      end
+    end 
 
 end

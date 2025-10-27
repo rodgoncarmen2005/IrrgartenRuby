@@ -30,8 +30,15 @@ module Irrgarten
     end
 
     #defend
-    def defend
-      
+    def defend(received_attack)
+      is_dead = self.dead
+      if !is_dead
+        defend_intensity = Dice.intensity(@intelligence)
+        if defend_intensity < received_attack
+        got_wounded
+      end
+      is_dead = self.dead
+      return is_dead
     end
 
     #pos --> establece la posición del monstruo
