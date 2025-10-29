@@ -13,13 +13,13 @@ module Irrgarten
 
     #constructor inicializa el laberinto a vacío y coloca la salida
     def initialize (n_rows, n_cols, exit_row, exit_col)
-      @rows = nrows.to_i
-      @cols = ncols.to_i
+      @n_rows = n_rows.to_i
+      @n_cols = n_cols.to_i
       @exit_row = exit_row.to_i
       @exit_col = exit_col.to_i
       
-      @monster = Array.new(n_rows) { Array.new(n_cols, @@EMPTY_CHAR) }
-      @labyrinth = Array.new(n_rows) { Array.new(n_cols, nil) }
+      @monster = Array.new(n_rows) { Array.new(n_cols, nil) }
+      @labyrinth = Array.new(n_rows) { Array.new(n_cols, @@EMPTY_CHAR) }
       @players = Array.new(n_rows) { Array.new(n_cols, nil) }
 
       labyrinth[exit_row][exit_col] = @@EXIT_CHAR
@@ -27,10 +27,11 @@ module Irrgarten
     end
 
     #Coloca los jugadores en posiciones aleatorias dentro del tablero
-    def spread_players (Array players)
-      player.each do |player|
+    def spread_players (players)
+      players.each do |player|
         pos = self.random_empty_pos #int []
-        self.put_player_2D(-1, -1, pos[ROW], pos[COL], player)
+        self.put_player_2D(-1, -1, pos[@@ROW], pos[@@COL], player)
+      end
     end
 
     #Devuelve true si hay un ganador (un jugador en la salida)
@@ -40,14 +41,18 @@ module Irrgarten
 
     #Muestra el laberinto por pantalla
     def to_s
-      str = ""
-      for r in 0...@rows
-        for c in 0...@cols
-          str += @labyrinth[r][c].to_s
+      output = ""
+      for r in 0...@n_rows
+        for c in 0...@n_cols
+          char = @labyrinth[r][c]
+          if @players[r][c] != nil
+            char = @players[r][c].number
+          end
+          output += char + " "
         end
-        str += "\n"
+        output += "\n"
       end
-      str
+      output
     end
 
     # Añade un monstruo en la posición indicada
@@ -74,6 +79,7 @@ module Irrgarten
       inc_row = 0
       if orientation == 'VERTICAL'
         inc_row = 1
+      end
       if orientation == 'HORIZONTAL'
         inc_col = 1
       end
@@ -97,10 +103,10 @@ module Irrgarten
         output.push(Directions::UP)
       end
       if can_step_on(row, col+1)
-        output.push(DIRECTIONS::RIGHT)
+        output.push(Directions::RIGHT)
       end
       if can_step_on(row, col-1)
-        output.push(DIRECTIONS::LEFT)
+        output.push(Directions::LEFT)
       end
       output
     end
@@ -151,7 +157,9 @@ module Irrgarten
     # Devuelve la nueva posición después de moverse en una dirección
     def dir_2_pos(row, col, direction)
 
-      salida = [@@ROW, @@COL]
+      pos = Array.new
+      pos[@@ROW] = row
+      pos[@@COL] = col
 
       case direction
       when 'LEFT'
@@ -201,7 +209,7 @@ module Irrgarten
           monster = @monster[row][col]
         else
           number = player.number
-          @labyrinth[row][col] = number.to_s
+          @labyrinth[row][col] = number
         end
         @players[row][col] = player
         player.set_pos(row, col)
