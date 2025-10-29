@@ -75,6 +75,48 @@ module Irrgarten
 			m.pos(2, 3)
 			puts "Después de cambiar de posición: #{m.to_s}"
 		end
+
+		def prueba_laberinth
+			l = Labyrinth.new(10, 10, 9, 9)
+			puts "Laberinto inicial:"
+			puts l.to_s
+
+			puts "Añadiendo bloques..."
+			l.add_block(Orientation::HORIZONTAL, 0, 5, 5)
+			l.add_block(Orientation::VERTICAL, 2, 2, 6)
+			puts l.to_s
+
+			players = Array.new
+			players << Player.new('1', 5.0, 7.0)
+			players << Player.new('2', 6.0, 6.5)
+
+			puts "Añadiendo jugadores..."
+			l.spread_players(players)
+			puts l.to_s
+
+			puts "Añadiendo un monstruo..."
+			m = Monster.new("Ogro", 5.0, 6.0)
+			l.add_monster(5, 5, m)
+			puts l.to_s
+
+			puts "Moviendo al jugador 1 hacia abajo..."
+			l.put_player(Directions::DOWN, players[0])
+			puts l.to_s
+
+			puts "Calculando movimientos válidos para el jugador 1..."
+			player = players[0]
+			row = player.row
+			col = player.col
+			array = l.valid_moves(row, col)
+
+			puts "Movimientos válidos para el jugador 1 en la posición (#{row},#{col}): #{array}"
+
+			l.put_player(Directions::RIGHT, player)
+			puts l.to_s
+		end
+
+			
+
 	end
 	
 	# Inicio de pruebas
