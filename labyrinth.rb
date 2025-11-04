@@ -115,7 +115,7 @@ module Irrgarten
 
     # Devuelve true si la posición está dentro del tablero y es válida
     def pos_ok(row, col)
-      row >= 0 && row < @rows && col >= 0 && col < @cols
+      (row >= 0 && row < @n_rows) && (col >= 0 && col < @n_cols)
     end
 
     # Devuelve true si la posición está vacía
@@ -171,10 +171,10 @@ module Irrgarten
       when 'DOWN'
         row += 1
       end
-        salida[0] = row
-        salida[1] = col
+        pos[0] = row
+        pos[1] = col
 
-        salida
+        pos
 
     end
 
@@ -188,7 +188,12 @@ module Irrgarten
         row = Dice.random_pos(@n_rows)
         col = Dice.random_pos(@n_cols)
       end
-      [row, col]
+
+      pos = Array.new
+      pos[@@ROW] = row
+      pos[@@COL] = col
+
+      return pos
     end
 
     # Mueve al jugador a la posición indicada y devuelve el monstruo si lo hay
