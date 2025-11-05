@@ -11,14 +11,8 @@ module Irrgarten
     @@MAX_SHIELDS = 3
     @@INITIAL_HEALTH = 10
     @@HITS2LOSE = 3
-    @name
-    @number
-    @intelligence
-    @strength
-    @health
-    @row
-    @col
-    @consecutive_hits = 0; 
+
+
 
   def initialize(number, intelligence, strength)
     @number = number.to_s
@@ -30,6 +24,7 @@ module Irrgarten
     @weapons = Array.new
     @shields = Array.new
 
+    @consecutive_hits = 0; 
     @row = -1
     @col = -1
   end
@@ -61,14 +56,14 @@ module Irrgarten
   end
 
   def dead
-    @health > 0
+    @health <= 0
   end
 
   def move (direction, valid_moves)
     size = valid_moves.size
     contained = valid_moves.include?(direction)
 
-    if size > 0 && contained
+    if size > 0 && !contained
       first_element = valid_moves[0]
       return first_element
     else
@@ -85,16 +80,16 @@ module Irrgarten
   end
 
   def received_reward
-    w_reward = Dice.weapon_reward
-    s_reward = Dice.shield_reward
+    w_reward = Dice.weapons_reward
+    s_reward = Dice.shields_reward
 
     w_reward.times do
-      w_new = Weapon.new
+      w_new = new_weapon
       received_weapon(w_new)
     end
 
     s_reward.times do
-      s_new = Shield.new
+      s_new = new_shield
       received_shield(s_new)
     end
 
@@ -103,39 +98,39 @@ module Irrgarten
   end
 
   def to_s
-    "Player #{@number} - Health: #{@health}, Weapons: #{sum_weapons}, Shields: #{sum_shields}, Pos: (#{@row}, #{@column})"
+    "Player #{@number} - Health: #{@health}, Weapons: #{sum_weapons}, Shields: #{sum_shields}, Pos: (#{@row}, #{@col})"
   end
 
 
   private
 
   def received_weapon(w)
-	(@weapons.size - 1).downto(0) do |i|
-	  wi = @weapons[i]
-	  discard = wi.discard
-	  if discard
-		@weapons.delete(wi)
+    (@weapons.size - 1).downto(0) do |i|
+      wi = @weapons[i]
+      discard = wi.discard
+      if discard
+      @weapons.delete(wi)
+      end
 	  end
-	end
 	
-	if @weapons.size < @@MAX_WEAPONS
-	  @weapons << w
-	end
+    if @weapons.size < @@MAX_WEAPONS
+      @weapons << w
+    end
   end
 
   def received_shield(s)
-	(@shields.size - 1).downto(0) do |i|
-	  si = @shields[i]
-	  discard = si.discard
+    (@shields.size - 1).downto(0) do |i|
+      si = @shields[i]
+      discard = si.discard
 
-	  if discard
-		@shields.delete(si)
-	  end
-	end
+      if discard
+      @shields.delete(si)
+      end
+    end
 
-	if @shields.size < @@MAX_SHIELDS
-	  @shields << s
-	end
+    if @shields.size < @@MAX_SHIELDS
+      @shields << s
+    end
   end
 
   def new_weapon

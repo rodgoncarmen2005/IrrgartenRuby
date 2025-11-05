@@ -18,7 +18,7 @@ module Irrgarten
       @exit_row = exit_row.to_i
       @exit_col = exit_col.to_i
       
-      @monster = Array.new(n_rows) { Array.new(n_cols, nil) }
+      @monsters = Array.new(n_rows) { Array.new(n_cols, nil) }
       @labyrinth = Array.new(n_rows) { Array.new(n_cols, @@EMPTY_CHAR) }
       @players = Array.new(n_rows) { Array.new(n_cols, nil) }
 
@@ -45,7 +45,7 @@ module Irrgarten
       for r in 0...@n_rows
         for c in 0...@n_cols
           char = @labyrinth[r][c]
-          if @players[r][c] != nil
+          if (@players[r][c] != nil) && (char != @@COMBAT_CHAR)
             char = @players[r][c].number
           end
           output += char + " "
@@ -59,7 +59,7 @@ module Irrgarten
     def add_monster(row, col, monster)
       if pos_ok(row, col) && empty_pos(row, col)
         @labyrinth[row][col] = @@MONSTER_CHAR
-        @monster[row][col] = monster
+        @monsters[row][col] = monster
         monster.pos(row, col)
       end
     end
@@ -140,7 +140,7 @@ module Irrgarten
 
     # Devuelve true si puedes moverte a esa posición
     def can_step_on(row, col)
-      pos_ok(row,col) && (empty_pos(row, col) || monster_pos(row, col) || combat_pos(row, col))
+      pos_ok(row,col) && (empty_pos(row, col) || monster_pos(row, col) || exit_pos(row, col))
     end
 
     # Actualiza una posicón válida después de que un jugador se haya movido
@@ -211,7 +211,7 @@ module Irrgarten
         monster_pos = self.monster_pos(row, col)
         if monster_pos
           @labyrinth[row][col] = @@COMBAT_CHAR
-          monster = @monster[row][col]
+          monster = @monsters[row][col]
         else
           number = player.number
           @labyrinth[row][col] = number
@@ -223,5 +223,5 @@ module Irrgarten
 
       end
     end 
-end
+  end
 end
