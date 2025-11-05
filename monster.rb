@@ -36,6 +36,7 @@ module Irrgarten
         defend_intensity = Dice.intensity(@intelligence)
         if defend_intensity < received_attack
         got_wounded
+        end
       end
       is_dead = self.dead
       return is_dead
@@ -54,7 +55,6 @@ module Irrgarten
     end
 
     private
-
     #got_wounded --> reduce la salud del monstruo en 1
     def got_wounded
       @health -= 1

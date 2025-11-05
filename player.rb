@@ -11,8 +11,6 @@ module Irrgarten
     @@MAX_SHIELDS = 3
     @@INITIAL_HEALTH = 10
     @@HITS2LOSE = 3
-  #FALTAN
-
 
   def initialize(number, intelligence, strength)
     @number = number.to_s
@@ -27,7 +25,7 @@ module Irrgarten
     @consecutive_hits = 0
 
     @row = -1
-    @column = -1
+    @col= -1
   end
 
 
@@ -41,21 +39,21 @@ module Irrgarten
     end
   end
 
-  def get_row
+  def row
     @row
   end
 
-  def get_column
-    @column
+  def col
+    @col
   end
   
-  def get_number
+  def number
     @number
   end
 
-  def set_pos(row, column)
+  def set_pos(row, col)
     @row = row
-    @column = column
+    @col = col
   end
 
   def dead
@@ -172,3 +170,6 @@ module Irrgarten
   def inc_consecutive_hits
     @consecutive_hits += 1
   end
+  
+  end
+end

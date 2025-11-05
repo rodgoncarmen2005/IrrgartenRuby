@@ -22,7 +22,7 @@ module Irrgarten
       @labyrinth = Array.new(n_rows) { Array.new(n_cols, @@EMPTY_CHAR) }
       @players = Array.new(n_rows) { Array.new(n_cols, nil) }
 
-      labyrinth[exit_row][exit_col] = @@EXIT_CHAR
+      @labyrinth[exit_row][exit_col] = @@EXIT_CHAR
 
     end
 
@@ -69,7 +69,7 @@ module Irrgarten
       old_row = player.row
       old_col = player.col
       new_pos = dir_2_pos(old_row, old_col, direction)
-      monster = put_player_2D(old_row, old_col, new_pos[ROW], new_pos[COL], player)
+      monster = put_player_2D(old_row, old_col, new_pos[@@ROW], new_pos[@@COL], player)
       monster
     end
 
@@ -162,13 +162,13 @@ module Irrgarten
       pos[@@COL] = col
 
       case direction
-      when 'LEFT'
+      when Directions::LEFT
         col -= 1
-      when 'RIGHT'
+      when Directions::RIGHT
         col += 1
-      when 'UP'
+      when Directions::UP
         row -= 1
-      when 'DOWN'
+      when Directions::DOWN
         row += 1
       end
         pos[0] = row
@@ -200,7 +200,7 @@ module Irrgarten
     def put_player_2D(old_row, old_col, row, col, player)
       monster = nil
       if self.can_step_on(row, col)
-        if self.can_step_on(old_row, old_col)
+        if self.pos_ok(old_row, old_col)
           p = @players[old_row][old_col]
           if p == player
             self.update_old_pos(old_row, old_col)
@@ -223,5 +223,5 @@ module Irrgarten
 
       end
     end 
-
+end
 end

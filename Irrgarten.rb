@@ -8,6 +8,8 @@ require_relative 'game_character'
 require_relative 'game_state'
 require_relative 'dice'
 require_relative 'monster'
+require_relative 'labyrinth'
+require_relative 'player'
 
 module Irrgarten
 
@@ -70,13 +72,16 @@ module Irrgarten
 			puts m.to_s
 			puts "Ataque: #{m.attack}"
 			puts "¿Está muerto? #{m.dead}"
-			m.got_wounded
-			puts "Después de ser herido: #{m.to_s}"
+			received_attack = 8
+			puts "Defendiendo contra un ataque de intensidad #{received_attack}"
+			is_dead = m.defend(received_attack)
+			puts "Después de defender: #{m.to_s}"
+			puts "¿Está muerto después del ataque? #{is_dead}"
 			m.pos(2, 3)
 			puts "Después de cambiar de posición: #{m.to_s}"
 		end
 
-		def prueba_laberinth
+		def self.prueba_laberinth
 			l = Labyrinth.new(10, 10, 9, 9)
 			puts "Laberinto inicial:"
 			puts l.to_s
@@ -159,6 +164,11 @@ module Irrgarten
 	puts "Probando la creación de monstruos..."
 	Irrgarten.prueba_monster("Ogro", 7.5, 3.5)
 	Irrgarten.prueba_monster("Araña", 5.0, 8.0)
+	puts "------------"
+
+	# PRUEBA DE LABERINTO
+	puts "Probando la creación del laberinto..."
+	Irrgarten.prueba_laberinth
 	puts "------------"
 
 end
