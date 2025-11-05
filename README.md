@@ -21,4 +21,6 @@
 ### 5. Ejemplos aplicados a esta clase:
     - Random Integer: rand(WEAPONS_REWARD + 1)
     - Random Float: rand * MAX_INTELLIGENCE
+    
+    FUNCIONA MI GITHUB
 =======================================================
