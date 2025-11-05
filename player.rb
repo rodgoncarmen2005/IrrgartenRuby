@@ -11,6 +11,14 @@ module Irrgarten
     @@MAX_SHIELDS = 3
     @@INITIAL_HEALTH = 10
     @@HITS2LOSE = 3
+    @name
+    @number
+    @intelligence
+    @strength
+    @health
+    @row
+    @col
+    @consecutive_hits = 0; 
 
   def initialize(number, intelligence, strength)
     @number = number.to_s
@@ -21,14 +29,10 @@ module Irrgarten
 
     @weapons = Array.new
     @shields = Array.new
-    
-    @consecutive_hits = 0
 
     @row = -1
-    @col= -1
+    @col = -1
   end
-
-
 
   def resurrect
     if Dice.resurrect_player
@@ -106,11 +110,32 @@ module Irrgarten
   private
 
   def received_weapon(w)
-
+	(@weapons.size - 1).downto(0) do |i|
+	  wi = @weapons[i]
+	  discard = wi.discard
+	  if discard
+		@weapons.delete(wi)
+	  end
+	end
+	
+	if @weapons.size < @@MAX_WEAPONS
+	  @weapons << w
+	end
   end
 
   def received_shield(s)
+	(@shields.size - 1).downto(0) do |i|
+	  si = @shields[i]
+	  discard = si.discard
 
+	  if discard
+		@shields.delete(si)
+	  end
+	end
+
+	if @shields.size < @@MAX_SHIELDS
+	  @shields << s
+	end
   end
 
   def new_weapon
@@ -170,6 +195,5 @@ module Irrgarten
   def inc_consecutive_hits
     @consecutive_hits += 1
   end
-  
-  end
+end
 end

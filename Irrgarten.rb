@@ -47,7 +47,7 @@ module Irrgarten
 			puts "Labyrinth: #{gs.labyrinth}"
 			puts "Players: #{gs.players}"
 			puts "Monsters: #{gs.monsters}"
-			puts "Current Player: #{gs.currentPlayer}"
+			puts "Current Player: #{gs.current_player}"
 			puts "Winner: #{gs.winner}"
 			puts "Log: #{gs.log}"
 		end

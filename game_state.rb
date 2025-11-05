@@ -26,7 +26,7 @@ module Irrgarten
 		def monsters()
 			@monsters
 		end
-		def currentPlayer()
+		def current_player()
 			@currentPlayer
 		end
 		def winner()
