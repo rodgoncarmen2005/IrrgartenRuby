@@ -14,29 +14,27 @@ module Irrgarten
     @@MAX_ROUNDS = 10
     @@ROWS = 10
     @@COLUMNS = 10
-    @@NUM_MONSTERS = 2
+    @@NUM_MONSTERS = 6
     @@NUM_BLOCKS = 2
 
     attr_reader :current_player_index, :log, :current_player, :players, :monsters, :labyrinth
 
-    def initialize(nplayers)
+    def initialize(n_players)
       @players = []
       @monsters = []
 
-      nplayers.times do |i|
+      n_players.times do |i|
         p = Player.new(i, Dice.random_intelligence, Dice.random_strength)
         @players << p
       end
 
-      @current_player_index = Dice.who_starts(nplayers)
+      @current_player_index = Dice.who_starts(n_players)
       @current_player = @players[@current_player_index]
-
-      @log = "The game begins\n"
 
       @labyrinth = Labyrinth.new(@@ROWS, @@COLUMNS, Dice.random_pos(@@ROWS), Dice.random_pos(@@COLUMNS))
       configure_labyrinth
       @labyrinth.spread_players(@players)
-      @log = "Empieza el juego"
+      @log = "Empieza el juego \n"
     end
 
     def finished
@@ -57,17 +55,17 @@ module Irrgarten
 
         monster = @labyrinth.put_player(direction, @current_player)
 
-        if monster.nil?
-          log_no_monster
+        if monster == nil
+          self.log_no_monster
         else
-          winner = combat(monster)
-          manage_reward(winner)
+          winner = self.combat(monster)
+          self.manage_reward(winner)
         end
       else
-        manage_resurrection
+        self.manage_resurrection
       end
 
-      end_game = finished
+      end_game = self.finished
       next_player unless end_game
       end_game
     end
@@ -84,7 +82,7 @@ module Irrgarten
         monsters_info += "+ #{m}\n"
       end
 
-      GameState.new(@labyrinth.to_s, players_info, monsters_info, @current_player_index, finished, @log)
+      GameState.new(@labyrinth.to_s, players_info, monsters_info, @current_player_index, self.finished, @log)
     end
 
     private
@@ -138,7 +136,7 @@ module Irrgarten
         end
       end
 
-      log_rounds(rounds, @@MAX_ROUNDS)
+      self.log_rounds(rounds, @@MAX_ROUNDS)
       winner
     end
 

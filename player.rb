@@ -9,7 +9,7 @@ module Irrgarten
     
     @@MAX_WEAPONS = 2
     @@MAX_SHIELDS = 3
-    @@INITIAL_HEALTH = 10
+    @@INITIAL_HEALTH = 3
     @@HITS2LOSE = 3
 
 
@@ -30,12 +30,10 @@ module Irrgarten
   end
 
   def resurrect
-    if Dice.resurrect_player
-      @weapons.clear
-      @shields.clear
-      @health = @@INITIAL_HEALTH
-      reset_hits
-    end
+    @weapons.clear
+    @shields.clear
+    @health = @@INITIAL_HEALTH
+    reset_hits
   end
 
   def row
