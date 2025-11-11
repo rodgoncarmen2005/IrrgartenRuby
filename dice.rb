@@ -47,11 +47,11 @@ module Irrgarten
 		end
 		
 		def self.weapon_power
-			@@generator.rand(@@MAX_ATTACK+1)
+			@@generator.rand(@@MAX_ATTACK.to_f)
 		end
 		
 		def self.shield_power
-			@@generator.rand(@@MAX_SHIELD+1)
+			@@generator.rand(@@MAX_SHIELD.to_f)
 		end
 		
 		def self.health_reward

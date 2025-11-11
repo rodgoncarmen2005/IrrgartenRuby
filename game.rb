@@ -66,7 +66,9 @@ module Irrgarten
       end
 
       end_game = self.finished
-      next_player unless end_game
+      if(!end_game)
+      	self.next_player
+      end
       end_game
     end
 
@@ -142,7 +144,7 @@ module Irrgarten
 
     def manage_reward(winner)
       if winner == GameCharacter::PLAYER
-        @current_player.received_reward
+        @current_player.receive_reward
         log_player_won
       else
         log_monster_won

@@ -73,22 +73,22 @@ module Irrgarten
     @strength + sum_weapons
   end
 
-  def defend(received_attack)
-    manage_hits(received_attack)
+  def defend(receive_attack)
+    manage_hits(receive_attack)
   end
 
-  def received_reward
+  def receive_reward
     w_reward = Dice.weapons_reward
     s_reward = Dice.shields_reward
 
     w_reward.times do
       w_new = new_weapon
-      received_weapon(w_new)
+      receive_weapon(w_new)
     end
 
     s_reward.times do
       s_new = new_shield
-      received_shield(s_new)
+      receive_shield(s_new)
     end
 
     extra_health = Dice.health_reward
@@ -114,7 +114,7 @@ module Irrgarten
 
   private
 
-  def received_weapon(w)
+  def receive_weapon(w)
     (@weapons.size - 1).downto(0) do |i|
       wi = @weapons[i]
       discard = wi.discard
@@ -128,7 +128,7 @@ module Irrgarten
     end
   end
 
-  def received_shield(s)
+  def receive_shield(s)
     (@shields.size - 1).downto(0) do |i|
       si = @shields[i]
       discard = si.discard
