@@ -96,7 +96,19 @@ module Irrgarten
   end
 
   def to_s
-    "Player #{@number} - Health: #{@health}, Weapons: #{sum_weapons}, Shields: #{sum_shields}, Pos: (#{@row}, #{@col})"
+    s = "#{@name} [I:#{@intelligence}, S:#{@strength}, H:#{@health}, Pos:(#{@row},#{@col}), Hits:#{@consecutive_hits}]\n"
+    
+    #Weapons
+    s += "\tWeapons: ["
+    s += @weapons.map(&:to_s).join(' ') 
+    s += "]\n"
+
+    #Shields
+    s += "\tShields: ["
+    s += @shields.map(&:to_s).join(' ') 
+    s += "]"
+    
+    s
   end
 
 
