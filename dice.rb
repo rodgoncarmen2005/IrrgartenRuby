@@ -51,15 +51,11 @@ module Irrgarten
 		end
 		
 		def self.shield_power
-			@@generator.rand(@@MAX_ATTACK+1)
-		end
-		
-		def self.shields_reward
-			@@generator.rand(@@MAX_SHIELD)
+			@@generator.rand(@@MAX_SHIELD+1)
 		end
 		
 		def self.health_reward
-			@@generator.rand(@@MAX_SHIELD)
+			@@generator.rand(@@HEALTH_REWARD+1)
 		end
 			
 		def self.uses_left
