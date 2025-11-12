@@ -124,6 +124,17 @@ module Irrgarten
       # Bloques prefijados
       @labyrinth.add_block(Orientation::HORIZONTAL, 5, 4, 2)
       @labyrinth.add_block(Orientation::VERTICAL, 9, 8, 1)
+      
+      # Bloques aleatorios
+      @@NUM_BLOCKS.times do |i|
+        if i%2 == 0
+          orientation = Orientation::VERTICAL
+        else
+        orientation = Orientation::HORIZONTAL
+        end
+        @labyrinth.add_block(orientation, Dice.random_pos(@@ROWS), Dice.random_pos(@@COLUMNS), 4)
+      end
+
     end
 	
 	 #/**

@@ -85,7 +85,7 @@ module Irrgarten
       end
       row = start_row
       col = start_col
-      while pos_ok(row, col) && empty_pos(row, col) && length > 0
+      while (pos_ok(row, col)) && (empty_pos(row, col)) && (length > 0)
         @labyrinth[row][col] = @@BLOCK_CHAR
         row += inc_row
         col += inc_col
