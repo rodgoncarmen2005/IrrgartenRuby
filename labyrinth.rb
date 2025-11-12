@@ -77,10 +77,10 @@ module Irrgarten
     def add_block(orientation, start_row, start_col, length)
       inc_col = 0
       inc_row = 0
-      if orientation == 'VERTICAL'
+      if orientation == Orientation::VERTICAL
         inc_row = 1
       end
-      if orientation == 'HORIZONTAL'
+      if orientation == Orientation::HORIZONTAL
         inc_col = 1
       end
       row = start_row
