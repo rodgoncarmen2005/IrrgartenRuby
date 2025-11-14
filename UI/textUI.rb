@@ -69,6 +69,7 @@ module UI
       if (game_state.winner)
         puts "Winner: Player " + game_state.current_player.to_s + "\n"
       else
+        puts "---------------------------------------" #Separador de turnos
         puts "Current player: " + game_state.current_player.to_s + "\n"
       end
     end

@@ -51,7 +51,7 @@ module Irrgarten
         
     #toString muestra los atributos del monstruo
     def to_s ()
-      "M[#{@name}, Strength#{@strength}, Intelligence:#{@intelligence}, Health:#{@health}, Dead: #{self.dead} Pos:(#{@row}, #{@col})]"
+      "M[#{@name}, Strength:#{@strength}, Intelligence:#{@intelligence}, Health:#{@health}, Dead:#{self.dead} Pos:(#{@row}, #{@col})]"
     end
 
     private
