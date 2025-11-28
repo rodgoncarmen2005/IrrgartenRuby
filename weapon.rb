@@ -19,4 +19,5 @@ module Irrgarten
 		end
 	end
 
+	public_class_method :new #esto es para que poder instanciar la clase ya que hereda de una clase abstract
 end
