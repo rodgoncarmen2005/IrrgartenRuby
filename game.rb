@@ -59,7 +59,7 @@ module Irrgarten
      #* @return true si finaliza el juego.
      #*/
     def next_step(preferred_direction)
-      @log = ""
+      @log = "" #reseteamos log
 
       dead = @current_player.dead
 

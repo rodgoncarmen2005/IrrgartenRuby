@@ -126,6 +126,22 @@ module Irrgarten
 		def self.discard_element(uses_left)
 			@@generator.rand >= ((uses_left.to_f)/@@MAX_USES)
 		end
+		
+	 
+     # Indica la direccion de movimiento preferente con una propabilidad proporcional al nivel de inteligencia.
+     # En caso de que no sea igual a preference, se elegira una aleatoria de validMoves.
+     # @param preference direccion de movimiento preferida
+     # @param validMoves array de las direccioness validas
+     # @param intelligence nivel de inteligencia
+     # @return direccion de movimiento elegida 
+     #
+		def self.next_step(preference, valid_moves, intelligence)
+			dir = preference
+			if @@generator.rand > intelligence
+				dir = valid_moves.get(@@generator.rand(valid_moves.size))
+			end
+			dir
+		end
 	end
 end
 		

@@ -3,9 +3,12 @@
 require_relative 'dice'
 require_relative 'weapon'
 require_relative 'shield'
+require_relative 'labyrinth_character'
 
 module Irrgarten
-  class Player
+  class Player < LabyrinthCharacter
+    
+    #HAY QUE CAMBIAR COSAS DE AQUI
     
     @@MAX_WEAPONS = 2 #(max armas por jugador)
     @@MAX_SHIELDS = 3 #(max escudos por jugador)
@@ -21,18 +24,18 @@ module Irrgarten
      #* @param strength fuerza
      #*/	
   def initialize(number, intelligence, strength)
-    @number = number.to_s
-    @name = "Player #{@number}"
-    @intelligence = intelligence
-    @strength = strength
-    @health = @@INITIAL_HEALTH
+    super("Player #{@number}", intelligence, strength, @@INITIAL_HEALTH)
 
     @weapons = Array.new
     @shields = Array.new
-
-    @consecutive_hits = 0; 
-    @row = -1
-    @col = -1
+  end
+  
+  def copy(other)
+  	super(other)
+  	
+  	number = other.number
+  	@weapons = other.weapons.clone
+	@shields = other.shields.clone
   end
 
     #/**
@@ -45,47 +48,13 @@ module Irrgarten
     @health = @@INITIAL_HEALTH
     reset_hits
   end
-    
-    #/**
-     #* Getter de la fila en la que se encuentra posicionado el jugador.
-     #* @return fila de la posición del jugador.
-     #*/
-  def row
-    @row
-  end
-  
-     #/**
-     #* Getter de la columna en la que se encuentra posicionado el jugador.
-     #* @return columna de la posicion del jugador.
-     #*/
-  def col
-    @col
-  end
-    
+
      #/**
      #* Getter del numero identificador del jugador.
      #* @return numero de jugador.
      #*/  
   def number
     @number
-  end
-
-    #/**
-     #* Setter de la posición del jugador en el laberinto.
-     #* @param row fila dentro de la posicion.
-     #* @param col columna dentro de la posicion.
-     #*/
-  def set_pos(row, col)
-    @row = row
-    @col = col
-  end
-
-     #/**
-     #* Indica si el jugador esta muerto.
-     #* @return true si el jugador esta muerto.
-     #*/
-  def dead
-    @health <= 0
   end
 
      #/**
@@ -113,7 +82,7 @@ module Irrgarten
     # * @return valor correspondiente al ataque.
     # */
   def attack
-    @strength + sum_weapons
+    stregth + sum_weapons
   end
 
      #/**
@@ -153,19 +122,26 @@ module Irrgarten
      #* @return cadena con el estado del jugador.
      #*/
   def to_s
-    s = "#{@name} [I:#{@intelligence}, S:#{@strength}, H:#{@health}, Pos:(#{@row},#{@col}), Hits:#{@consecutive_hits}]\n"
+    super
     
-    #Weapons
-    s += "\tWeapons: ["
-    s += @weapons.map(&:to_s).join(' ') 
-    s += "]\n"
+    s = "\tWeapons: ["
+	@weapons.each_with_index do |w, i|
+	  s += w.to_s
+	  if i < @weapons.size - 1
+	  	s += ", " 
+	  end
+	end
+	s += "]\n"
 
-    #Shields
-    s += "\tShields: ["
-    s += @shields.map(&:to_s).join(' ') 
-    s += "]"
-    
-    s
+	s += "\tShields: ["
+	@shields.each_with_index do |sh, i|
+	  s += sh.to_s
+	  if i < @shields.size - 1
+	  	s += ", "
+	  end 
+	end
+	s += "]"
+	s
   end
 
 
@@ -285,19 +261,13 @@ module Irrgarten
   def reset_hits
     @consecutive_hits = 0
   end
-    
-     #/**
-     #* Decrementa la salud en una unidad por herida.
-     #*/
-  def got_wounded
-    @health -= 1
-  end
-    
+
      #/**
      #* Incrementa en una unidad el contador de impactos consecutivos.
      #*/
   def inc_consecutive_hits
     @consecutive_hits += 1
   end
+  
 end
 end

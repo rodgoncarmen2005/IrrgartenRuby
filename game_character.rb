@@ -6,5 +6,4 @@ module Irrgarten
 			PLAYER = :player
 			MONSTER = :monster
 		end
-		
 end

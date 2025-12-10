@@ -48,6 +48,7 @@ module Irrgarten
           if (@players[r][c] != nil) && (char != @@COMBAT_CHAR)
             char = @players[r][c].number
           end
+          #puts @labyrinth.inspect
           output += char + " "
         end
         output += "\n"
@@ -217,7 +218,7 @@ module Irrgarten
           @labyrinth[row][col] = number
         end
         @players[row][col] = player
-        player.set_pos(row, col)
+        player.pos(row, col)
 
         monster
 
