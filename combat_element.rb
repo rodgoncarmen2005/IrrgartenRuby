@@ -23,7 +23,7 @@ module Irrgarten
     end
 
     # discard_element --> devuelve si se desecha el elemento de combate apoyandose en Dice.discard_element
-    def discard_element
+    def discard
       Dice.discard_element(@uses)
     end
 

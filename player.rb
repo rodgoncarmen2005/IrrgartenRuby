@@ -24,7 +24,10 @@ module Irrgarten
      #* @param strength fuerza
      #*/	
   def initialize(number, intelligence, strength)
+    @number = number
     super("Player #{@number}", intelligence, strength, @@INITIAL_HEALTH)
+
+    @consecutive_hits = 0    
 
     @weapons = Array.new
     @shields = Array.new
@@ -35,7 +38,7 @@ module Irrgarten
   	
   	number = other.number
   	@weapons = other.weapons.clone
-	@shields = other.shields.clone
+	  @shields = other.shields.clone
   end
 
     #/**
@@ -82,7 +85,7 @@ module Irrgarten
     # * @return valor correspondiente al ataque.
     # */
   def attack
-    stregth + sum_weapons
+    @strength + sum_weapons
   end
 
      #/**
@@ -122,10 +125,10 @@ module Irrgarten
      #* @return cadena con el estado del jugador.
      #*/
   def to_s
-    super
+    s = super
     
-    s = "\tWeapons: ["
-	@weapons.each_with_index do |w, i|
+    s += "\tWeapons: ["
+	  @weapons.each_with_index do |w, i|
 	  s += w.to_s
 	  if i < @weapons.size - 1
 	  	s += ", " 

@@ -46,7 +46,7 @@ module Irrgarten
         for c in 0...@n_cols
           char = @labyrinth[r][c]
           if (@players[r][c] != nil) && (char != @@COMBAT_CHAR)
-            char = @players[r][c].number
+            char = @players[r][c].number.to_s
           end
           #puts @labyrinth.inspect
           output += char + " "

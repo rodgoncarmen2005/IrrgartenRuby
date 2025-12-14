@@ -38,7 +38,7 @@ module Irrgarten
      # @return true si el jugador esta muerto.
      #
 	def dead()
-		health <= 0
+		@health <= 0
 	end
 	
 	 #/**
