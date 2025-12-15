@@ -12,7 +12,7 @@ module Irrgarten
     
     @@MAX_WEAPONS = 2 #(max armas por jugador)
     @@MAX_SHIELDS = 3 #(max escudos por jugador)
-    @@INITIAL_HEALTH = 10 #(salud inicial del jugador)
+    @@INITIAL_HEALTH = 3 #(salud inicial del jugador)
     @@HITS2LOSE = 3 #(num de golpes que puede recibir antes de morir)
 
 

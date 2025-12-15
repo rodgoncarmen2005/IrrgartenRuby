@@ -223,6 +223,16 @@ module Irrgarten
         monster
 
       end
-    end 
+    end
+    
+    def convert_to_fuzzy(fuzzy_player)
+      row = fuzzy_player.row
+            col = fuzzy_player.col
+
+      if (@players[row][col].number == fuzzy_player.number)
+                @players[row][col] = fuzzy_player
+      end
+    end
+
   end
 end

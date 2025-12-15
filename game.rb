@@ -29,7 +29,8 @@ module Irrgarten
       @monsters = []
 
       n_players.times do |i|
-        p = Player.new(i, Dice.random_intelligence, Dice.random_strength)
+        #p = Player.new(i, Dice.random_intelligence, Dice.random_strength)
+        p = Player.new(i, 0, Dice.random_strength)
         @players << p
       end
 
@@ -206,6 +207,14 @@ module Irrgarten
       if resurrect
         @current_player.resurrect
         log_resurrected
+        # Lo convertimos en Fuzzy
+        fuzzy = FuzzyPlayer.new(@current_player)
+
+        # Modificamos el array de jugadores
+        @players[@current_player_index] = fuzzy
+
+        # Modificamos la tabla de jugadores en el laberinto
+        @labyrinth.convert_to_fuzzy(fuzzy)
       else
         log_player_skip_turn
       end
