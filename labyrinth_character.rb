@@ -3,7 +3,15 @@
 module Irrgarten
 	class LabyrinthCharacter
 	
-	#HAY QUE PONER LOS ATTR
+	protected
+    attr_reader :name
+    attr_reader :intelligence
+    attr_reader :strength
+    attr_accessor :health
+
+    public
+    attr_reader :row
+    attr_reader :col
 	
      # Constructor para el objeto LabyrinthCharacter. Se inicializa con una posicion (-1,-1) en el tablero.
      # @param name nombre del personaje
@@ -21,6 +29,13 @@ module Irrgarten
 		@col = -1; 
 	end
 	
+     # Indica si el jugador esta muerto, es decir, si no posee nada de salud.
+     # @return true si el jugador esta muerto.
+     #
+	def dead()
+		@health <= 0
+	end
+	
 	 #
      # Constructor de copia para el objeto LabyrinthCharacter.
      # @param other objeto LabyrinthCharacter a copiar.
@@ -31,14 +46,7 @@ module Irrgarten
 		@strength = other.strength
 		@health = other.health
 		
-		set_pos(other.row, other.col)
-	end
-	
-     # Indica si el jugador esta muerto, es decir, si no posee nada de salud.
-     # @return true si el jugador esta muerto.
-     #
-	def dead()
-		@health <= 0
+		pos(other.row, other.col)
 	end
 	
 	 #/**
@@ -62,22 +70,23 @@ module Irrgarten
 	
 	# Getter de la inteligencia del personaje.
 	# @return inteligencia del personaje.
-	def get_intelligence
+	def intelligence
 	  @intelligence
 	end
 
 	# Getter de la fuerza del personaje.
 	# @return fuerza del personaje.
-	def get_strength
+	def strength
 	  @strength
 	end
 
 	# Getter de la salud del personaje.
 	# @return salud del personaje.
-	def get_health
+	def health
 	  @health
 	end
 
+	public
 	# Setter de la salud del personaje.
 	# @param health cantidad de salud a asignar
 	def set_health(health)

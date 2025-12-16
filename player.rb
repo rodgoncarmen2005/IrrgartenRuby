@@ -7,15 +7,18 @@ require_relative 'labyrinth_character'
 
 module Irrgarten
   class Player < LabyrinthCharacter
-    
-    #HAY QUE CAMBIAR COSAS DE AQUI
-    
+
     @@MAX_WEAPONS = 2 #(max armas por jugador)
     @@MAX_SHIELDS = 3 #(max escudos por jugador)
-    @@INITIAL_HEALTH = 3 #(salud inicial del jugador)
+    @@INITIAL_HEALTH = 10 #(salud inicial del jugador)
     @@HITS2LOSE = 3 #(num de golpes que puede recibir antes de morir)
 
-
+	protected
+	attr_reader :weapons
+	attr_reader :shields
+	attr_reader :consecutive_hits
+	
+	public
 	#/**
      #* Constructor de la clase Player. Se inicializa con una posicion (-1,-1) en el tablero.
      #* Actualmente no tiene armas ni escudos.
@@ -23,22 +26,22 @@ module Irrgarten
      #* @param intelligence inteligencia
      #* @param strength fuerza
      #*/	
-  def initialize(number, intelligence, strength)
-    @number = number
-    super("Player #{@number}", intelligence, strength, @@INITIAL_HEALTH)
-
-    @consecutive_hits = 0    
-
+  def initialize(number, intelligence, strength) 
+    @number = number.to_s
+    name = "Player " + @number
+    super(name, intelligence, strength, @@INITIAL_HEALTH)
     @weapons = Array.new
     @shields = Array.new
+    @consecutive_hits = 0 
   end
   
   def copy(other)
-  	super(other)
+  	super
   	
-  	number = other.number
+  	@number = other.number
   	@weapons = other.weapons.clone
 	  @shields = other.shields.clone
+	  @consecutive_hits = other.consecutive_hits
   end
 
     #/**

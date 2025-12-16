@@ -1,5 +1,9 @@
 #encoding:utf-8
 
+require_relative 'dice'
+require_relative 'directions'
+require_relative 'orientation'
+
 module Irrgarten
 
   class Labyrinth 
@@ -225,9 +229,10 @@ module Irrgarten
       end
     end
     
-    def convert_to_fuzzy(fuzzy_player)
+    public 
+    def to_fuzzy(fuzzy_player)
       row = fuzzy_player.row
-            col = fuzzy_player.col
+      col = fuzzy_player.col
 
       if (@players[row][col].number == fuzzy_player.number)
                 @players[row][col] = fuzzy_player

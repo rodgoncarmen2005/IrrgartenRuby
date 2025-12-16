@@ -8,6 +8,7 @@ require_relative 'game_state'
 require_relative 'directions'
 require_relative 'game_character'
 require_relative 'orientation'
+require_relative 'fuzzy_player'
 
 module Irrgarten
   class Game
@@ -29,8 +30,7 @@ module Irrgarten
       @monsters = []
 
       n_players.times do |i|
-        #p = Player.new(i, Dice.random_intelligence, Dice.random_strength)
-        p = Player.new(i, 0, Dice.random_strength)
+        p = Player.new(i, Dice.random_intelligence, Dice.random_strength)
         @players << p
       end
 
@@ -214,7 +214,7 @@ module Irrgarten
         @players[@current_player_index] = fuzzy
 
         # Modificamos la tabla de jugadores en el laberinto
-        @labyrinth.convert_to_fuzzy(fuzzy)
+        @labyrinth.to_fuzzy(fuzzy)
       else
         log_player_skip_turn
       end

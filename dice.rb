@@ -113,7 +113,11 @@ module Irrgarten
      #* @return valor aleatorio en [0, competence).
      #*/
 		def self.intensity(competence)
-			@@generator.rand(competence)
+			i = 0	
+			if competence > 0 
+            	i = @@generator.rand(competence)
+			end
+			return i
 		end
 		
 	 #/**
@@ -137,8 +141,8 @@ module Irrgarten
      #
 		def self.next_step(preference, valid_moves, intelligence)
 			dir = preference
-			if @@generator.rand > intelligence
-				dir = valid_moves.get(@@generator.rand(valid_moves.size))
+			if @@generator.rand > (intelligence/@@MAX_INTELLIGENCE)
+				dir = valid_moves[@@generator.rand(valid_moves.size)]
 			end
 			dir
 		end
