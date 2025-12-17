@@ -235,7 +235,7 @@ module Irrgarten
       col = fuzzy_player.col
 
       if (@players[row][col].number == fuzzy_player.number)
-                @players[row][col] = fuzzy_player
+        @players[row][col] = fuzzy_player
       end
     end
 
